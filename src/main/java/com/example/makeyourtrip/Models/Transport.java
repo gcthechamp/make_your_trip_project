@@ -3,15 +3,8 @@ package com.example.makeyourtrip.Models;
 
 import com.example.makeyourtrip.Enums.City;
 import com.example.makeyourtrip.Enums.ModeOfTransport;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -22,12 +15,14 @@ import java.util.List;
 @Entity
 @Table(name = "transport")
 @Data
+@Builder
 public class Transport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transportId;
 
+    @Enumerated(value = EnumType.STRING)
     private ModeOfTransport modeOfTransport;
 
     private LocalDate journeyDate;
@@ -35,6 +30,8 @@ public class Transport {
     private LocalTime startTime;
 
     private double journeyTime;
+
+    private String companyName;
 
     @ManyToOne
     @JoinColumn
